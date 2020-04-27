@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'org.spongepowered.plugin' version '0.9.0'
+}
+
+compileJava.options.encoding = 'UFT-8'
+
+group 'me.troyg'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        url "https://raw.github.com/FabioZumbi12/UltimateChat/mvn-repo/"
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.spongepowered:spongeapi:7.2.0'
+    compile 'br.net.fabiozumbi12.UltimateChat:UltimateChat-Sponge-7.0-8.0:1.8.6'
+    compile fileTree(dir: 'libs', include: '*.jar')
+}
