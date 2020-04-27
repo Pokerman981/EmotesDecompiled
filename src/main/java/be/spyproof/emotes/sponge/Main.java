@@ -88,7 +88,7 @@
 /*     */ 
 /*     */ 
 /*     */         
-/*  91 */         .emoteStorage = (IStorage<Emote, String>)new CachedEmoteStorage(EmoteNameCheck.get(), EmoteStringKeyCheck.get(), (IStorage)new MySqlEmoteStorage(this.config.getMySQLHost(), this.config.getMySQLPort(), this.config.getMySQLDb(), this.config.getMySQLUser(), this.config.getMySQLPass()));
+/*  91 */         .emoteStorage = (IStorage<Emote, String>)new CachedEmoteStorage(EmoteNameCheck.get(), EmoteStringKeyCheck.get(), new MySqlEmoteStorage(this.config.getMySQLHost(), this.config.getMySQLPort(), this.config.getMySQLDb(), this.config.getMySQLUser(), this.config.getMySQLPass()));
 /*     */     }
 /*     */     else {
 /*     */       
@@ -113,100 +113,99 @@
 /* 113 */     if (this.emoteStorage.getAll().size() == 0) {
 /*     */       
 /* 115 */       this.emoteStorage.save(ConversionUtils.createEmote("cutie", 
-/* 116 */             Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " is a cutie ", TextColors.RESET, "◕ ◡ ◕" } ), new Text[] {
-/* 117 */               Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " thinks ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " is a cutie", TextColors.RESET, " ◕ ◡ ◕") }));
+/* 116 */             Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " is a cutie ", TextColors.RESET, "◕ ◡ ◕"),
+/* 117 */               Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " thinks ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " is a cutie", TextColors.RESET, " ◕ ◡ ◕")));
 /* 118 */       this.emoteStorage.save(ConversionUtils.createEmote("dealwithit", 
-/* 119 */             Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GRAY, " ╰▄︻▄╯", TextColors.DARK_GREEN, " deal with it" } ), new Text[] {
-/* 120 */               Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GRAY, " ╰▄︻▄╯", TextColors.DARK_GREEN, " deal with it ", TextColors.RESET, "${receiver}") }));
+/* 119 */             Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GRAY, " ╰▄︻▄╯", TextColors.DARK_GREEN, " deal with it"),
+/* 120 */               Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GRAY, " ╰▄︻▄╯", TextColors.DARK_GREEN, " deal with it ", TextColors.RESET, "${receiver}")));
 /* 121 */       this.emoteStorage.save(ConversionUtils.createEmote("derp", 
-/* 122 */             Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " are a herp a derp ◖|◔◡◉|◗" } ), new Text[] {
-/* 123 */               Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " thinks ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " are a herp a derp ◖|◔◡◉|◗") }));
+/* 122 */             Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " are a herp a derp ◖|◔◡◉|◗"),
+/* 123 */               Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " thinks ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " are a herp a derp ◖|◔◡◉|◗")));
 /* 124 */       this.emoteStorage.save(ConversionUtils.createEmote("facedesk", 
-/* 125 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " slammed a desk on its face *" } ), new Text[] {
-/* 126 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " slammed a desk on ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "'s face *") }));
+/* 125 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " slammed a desk on its face *"),
+/* 126 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " slammed a desk on ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "'s face *")));
 /* 127 */       this.emoteStorage.save(ConversionUtils.createEmote("facepalm", 
-/* 128 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " facepalmed *" } ), new Text[] {
-/* 129 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " facepalmed for ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " *" }) }));
+/* 128 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " facepalmed *") ,
+/* 129 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " facepalmed for ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " *")));
 /* 130 */       this.emoteStorage.save(ConversionUtils.createEmote("gasp", 
-/* 131 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " gasps * ⊙▃⊙" } ), new Text[] {
-/* 132 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " gasps at ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * ⊙▃⊙" }) }));
+/* 131 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " gasps * ⊙▃⊙"),
+/* 132 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " gasps at ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * ⊙▃⊙")));
 /* 133 */       this.emoteStorage.save(ConversionUtils.createEmote("hugs", 
-/* 134 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " hugs everyone * (づ｡◕‿‿◕｡)づ" } ), new Text[] {
-/* 135 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " hugs ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * (づ｡◕‿‿◕｡)づ" }) }));
+/* 134 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " hugs everyone * (づ｡◕‿‿◕｡)づ"),
+/* 135 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " hugs ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * (づ｡◕‿‿◕｡)づ")));
 /* 136 */       this.emoteStorage.save(ConversionUtils.createEmote("omg", 
-/* 137 */             Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " Oh... My... God... ಠ_ಠ" } ), new Text[] {
-/* 138 */               Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " Oh... My... God... Why ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "? ಠ_ಠ" }) }));
+/* 137 */             Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " Oh... My... God... ಠ_ಠ"),
+/* 138 */               Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " Oh... My... God... Why ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "? ಠ_ಠ")));
 /* 139 */       this.emoteStorage.save(ConversionUtils.createEmote("rage", 
-/* 140 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " rages out! * (╯°□°）╯︵ ┻━┻" } ), new Text[] { 
-/* 141 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " rages out at ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "! * (╯°□°）╯︵ ┻━┻  ╰(”◕﹏◕”)つ" })}));
+/* 140 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " rages out! * (╯°□°）╯︵ ┻━┻"),
+/* 141 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " rages out at ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "! * (╯°□°）╯︵ ┻━┻  ╰(”◕﹏◕”)つ")));
 /* 142 */       this.emoteStorage.save(ConversionUtils.createEmote("runs", 
-/* 143 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " runs away * ᕕ(◉Д◉ )ᕗ" } ), new Text[] {
-/* 144 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " runs away from ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * ᕕ(◉Д◉ )ᕗ") }));
+/* 143 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " runs away * ᕕ(◉Д◉ )ᕗ"),
+/* 144 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " runs away from ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * ᕕ(◉Д◉ )ᕗ")));
 /* 145 */       this.emoteStorage.save(ConversionUtils.createEmote("brb", 
-/* 146 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " will be right back *" } ), new Text[] {
-/* 147 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${receiver}", TextColors.DARK_GREEN, " o/ ", TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " will be right back " }) }));
+/* 146 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " will be right back *"),
+/* 147 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${receiver}", TextColors.DARK_GREEN, " o/ ", TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " will be right back ")));
 /* 148 */       this.emoteStorage.save(ConversionUtils.createEmote("fart", 
-/* 149 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " farted *" } ), new Text[] {
-/* 150 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " farted in ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "'s face * " }) }));
+/* 149 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " farted *"),
+/* 150 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " farted in ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "'s face * ")));
 /* 151 */       this.emoteStorage.save(ConversionUtils.createEmote("star", 
-/* 152 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " gives golden star to self * ", TextColors.GOLD, "★" } ), new Text[] {
-/* 153 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " gives ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " a golden star * ", 
-/* 154 */                   TextColors.GOLD, "★" }) })); 
+/* 152 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " gives golden star to self * ", TextColors.GOLD, "★"),
+/* 153 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " gives ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " a golden star * ",
+/* 154 */                   TextColors.GOLD, "★")));
                 this.emoteStorage.save(ConversionUtils.createEmote("inlove", 
-/* 155 */             Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " is in love ", TextColors.LIGHT_PURPLE, "♥.♥" } ), new Text[] {
-/* 156 */               Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " is in love with ", TextColors.RESET, "${receiver} ", TextColors.LIGHT_PURPLE, "♥.♥" }) }));
+/* 155 */             Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " is in love ", TextColors.LIGHT_PURPLE, "♥.♥"),
+/* 156 */               Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " is in love with ", TextColors.RESET, "${receiver} ", TextColors.LIGHT_PURPLE, "♥.♥")));
 /* 157 */       this.emoteStorage.save(ConversionUtils.createEmote("sleepy", 
-/* 158 */             Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " feels sleepy right now Zzzz... ≈ ___≈" } ), new Text[] {
-/* 159 */               Text.of(new Object[] { TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " makes ", TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " very sleepy Zzzz... ≈ ___≈" }) }));
+/* 158 */             Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " feels sleepy right now Zzzz... ≈ ___≈"),
+/* 159 */               Text.of(TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " makes ", TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " very sleepy Zzzz... ≈ ___≈")));
 /* 160 */       this.emoteStorage.save(ConversionUtils.createEmote("bored", 
-/* 161 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " feels bored * SIGH!" } ), new Text[] {
-/* 162 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " SIGHS * ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " is sooooo boring!" }) }));
+/* 161 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " feels bored * SIGH!"),
+/* 162 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " SIGHS * ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " is sooooo boring!")));
 /* 163 */       this.emoteStorage.save(ConversionUtils.createEmote("crazy", 
-/* 164 */             Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " is going crazzzyyyy!?! 0___0" }), new Text[] {
-/* 165 */               Text.of(new Object[] { TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " is making ", TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " crazy! 0___0" }) }));
+/* 164 */             Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " is going crazzzyyyy!?! 0___0"),
+/* 165 */               Text.of(TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " is making ", TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " crazy! 0___0")));
 /* 166 */       this.emoteStorage.save(ConversionUtils.createEmote("book", 
-/* 167 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " reads a book *" } ), new Text[] {
-/* 168 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " stops reading a book and throws it at ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " *" }) }));
+/* 167 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " reads a book *"),
+/* 168 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " stops reading a book and throws it at ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " *")));
 /* 169 */       this.emoteStorage.save(ConversionUtils.createEmote("cry", 
-/* 170 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " cries * ;-;" } ), new Text[] {
-/* 171 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${receiver}", TextColors.DARK_GREEN, " makes ", TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " cry * ;-;" }) }));
+/* 170 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " cries * ;-;"),
+/* 171 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${receiver}", TextColors.DARK_GREEN, " makes ", TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " cry * ;-;")));
 /* 172 */       this.emoteStorage.save(ConversionUtils.createEmote("stare", 
-/* 173 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " stares into the distance * >.>" } ), new Text[] {
-/* 174 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " stares at ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " awkwardly * <.<" }) }));
+/* 173 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " stares into the distance * >.>"),
+/* 174 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " stares at ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " awkwardly * <.<")));
 /* 175 */       this.emoteStorage.save(ConversionUtils.createEmote("notime", 
-/* 176 */             Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " ain't gat no time for that! \\>.</" } ), new Text[] {
-/* 177 */               Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " gat no time for ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "! \\>.</" }) }));
+/* 176 */             Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " ain't gat no time for that! \\>.</"),
+/* 177 */               Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " gat no time for ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "! \\>.</")));
 /* 178 */       this.emoteStorage.save(ConversionUtils.createEmote("goofball", 
-/* 179 */             Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " feels like a goofball v_v" } ), new Text[] {
-/* 180 */               Text.of(new Object[] { TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " thinks ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " is a goofball v.v" }) }));
+/* 179 */             Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " feels like a goofball v_v"),
+/* 180 */               Text.of(TextColors.RESET, "${sender}", TextColors.DARK_GREEN, " thinks ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " is a goofball v.v")));
 /* 181 */       this.emoteStorage.save(ConversionUtils.createEmote("rofl", 
-/* 182 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " rolls over the floor, laughing * " } ), new Text[] {
-/* 183 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " rolls over the floor, laughing at ", TextColors.RESET, "${receiver}" }) }));
+/* 182 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " rolls over the floor, laughing * "),
+/* 183 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " rolls over the floor, laughing at ", TextColors.RESET, "${receiver}")));
 /* 184 */       this.emoteStorage.save(ConversionUtils.createEmote("daydream", 
-/* 185 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " starts daydreaming * ◔.◔" } ), new Text[] {
-/* 186 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " starts daydreaming about ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * ◔.◔" }) }));
+/* 185 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " starts daydreaming * ◔.◔"),
+/* 186 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " starts daydreaming about ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * ◔.◔")));
 /* 187 */       this.emoteStorage.save(ConversionUtils.createEmote("sorry", 
-/* 188 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " feels sorry * D;" } ), new Text[] {
-/* 189 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " feels sorry for ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * D;" }) }));
+/* 188 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " feels sorry * D;"),
+/* 189 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " feels sorry for ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * D;")));
 /* 190 */       this.emoteStorage.save(ConversionUtils.createEmote("bite", 
-/* 191 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " bites self * 0w0" } ), new Text[] {
-/* 192 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " nibbles on ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * ^w^" }) }));
+/* 191 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " bites self * 0w0"),
+/* 192 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " nibbles on ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * ^w^")));
 /* 193 */       this.emoteStorage.save(ConversionUtils.createEmote("scared", 
-/* 194 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " feels scared * 【•】_【•】" } ), new Text[] {
-/* 195 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " was scared by ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * 【•】_【•】" }) }));
+/* 194 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " feels scared * 【•】_【•】"),
+/* 195 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " was scared by ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * 【•】_【•】")));
 /* 196 */       this.emoteStorage.save(ConversionUtils.createEmote("poke", 
-/* 197 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " pokes everyone * ☚" } ), new Text[] {
-/* 198 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " pokes ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * ☚" }) }));
+/* 197 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " pokes everyone * ☚"),
+/* 198 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " pokes ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * ☚")));
 /* 199 */       this.emoteStorage.save(ConversionUtils.createEmote("wave", 
-/* 200 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " waves * o/" } ), new Text[] {
-/* 201 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " waves at ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * o/" }) }));
+/* 200 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " waves * o/"),
+/* 201 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " waves at ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * o/")));
 /* 202 */       this.emoteStorage.save(ConversionUtils.createEmote("cookie", 
-/* 203 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " eats a cookie * ^_^" } ), new Text[] {
-/* 204 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " shares a cookie with ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * ^_^" }) }));
+/* 203 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " eats a cookie * ^_^"),
+/* 204 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " shares a cookie with ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, " * ^_^")));
 /* 205 */       this.emoteStorage.save(ConversionUtils.createEmote("lick", 
-/* 206 */             Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " licks * ^_^" } ), new Text[] {
-/* 207 */               Text.of(new Object[] { TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " licks ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "'s face * " })
-/*     */             }));
+/* 206 */             Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " licks * ^_^"),
+/* 207 */               Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " licks ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "'s face * ")));
 /*     */     } 
 /*     */   }
 /*     */ 
@@ -220,12 +219,12 @@
 /*     */   public void onInit(GameInitializationEvent event) {
 /* 220 */     this.logger.trace("Init");
 /* 221 */     if (this.emoteStorage.getClass() == MemoryStorage.class) {
-/* 222 */       Sponge.getEventManager().registerListener(this, ClientConnectionEvent.Join.class, (EventListener)new InvalidStorageNotifier());
+/* 222 */       Sponge.getEventManager().registerListener(this, ClientConnectionEvent.Join.class, new InvalidStorageNotifier());
 /*     */     }
 /*     */     
 /*     */     try {
 /* 226 */       Class.forName("br.net.fabiozumbi12.UltimateChat.Sponge.UChat");
-/* 227 */       this.emoteMessageChannel.addListener((EventListener)new UChatListener());
+/* 227 */       this.emoteMessageChannel.addListener(new UChatListener());
 /* 228 */     } catch (ClassNotFoundException classNotFoundException) {}
 /*     */   }
 /*     */ 
@@ -275,37 +274,35 @@
 /* 274 */       nameTransformer = new NameTransformer();
 /*     */     }
 /* 276 */     CommandSpec.Builder emotesCmdBuilder = CommandSpec.builder();
-/* 277 */     emotesCmdBuilder.executor((CommandExecutor)new ListEmotesCommand(this.emoteStorage, (INameTransformer)nameTransformer, (MessageChannel)this.emoteMessageChannel, this.config.noPermissionMsg()));
-/* 278 */     emotesCmdBuilder.arguments(new CommandElement[] {
-/* 279 */           GenericArguments.optional((CommandElement)new EmoteArgument("emote", this.emoteStorage)), 
-/* 280 */           GenericArguments.optional((CommandElement)new RemainingArgsOrPlayerArgument((Text)Text.of("receiver")))
-/*     */         });
+/* 277 */     emotesCmdBuilder.executor(new ListEmotesCommand(this.emoteStorage, nameTransformer, this.emoteMessageChannel, this.config.noPermissionMsg()));
+/* 278 */     emotesCmdBuilder.arguments(/* 279 */           GenericArguments.optional(new EmoteArgument("emote", this.emoteStorage)),
+            /* 280 */           GenericArguments.optional(new RemainingArgsOrPlayerArgument(Text.of("receiver")))
+            /*     */);
 /*     */     
 /* 283 */     CommandSpec.Builder randomEmoteBuilder = CommandSpec.builder();
-/* 284 */     randomEmoteBuilder.executor((CommandExecutor)new GiveRandomEmoteCommand(this.emoteStorage, this.config
+/* 284 */     randomEmoteBuilder.executor(new GiveRandomEmoteCommand(this.emoteStorage, this.config
 /*     */           
 /* 286 */           .giveEmotePermissionCmd(), this.config
 /* 287 */           .backupCmd(), this.config
 /* 288 */           .giveEmotePermissionMsg(), this.config
 /* 289 */           .backupMsg()));
 /*     */     
-/* 291 */     randomEmoteBuilder.arguments(GenericArguments.player((Text)Text.of("player")));
+/* 291 */     randomEmoteBuilder.arguments(GenericArguments.player(Text.of("player")));
 /* 292 */     randomEmoteBuilder.permission("emotes.give-random");
 /*     */     
 /* 294 */     CommandSpec.Builder giveEmoteBuilder = CommandSpec.builder();
-/* 295 */     giveEmoteBuilder.executor((CommandExecutor)new GiveEmoteCommand(this.config
+/* 295 */     giveEmoteBuilder.executor(new GiveEmoteCommand(this.config
 /* 296 */           .giveEmotePermissionCmd(), this.config
 /* 297 */           .giveEmotePermissionMsg()));
 /*     */     
-/* 299 */     giveEmoteBuilder.arguments(new CommandElement[] {
-/* 300 */           GenericArguments.player((Text)Text.of("player")), (CommandElement)new EmoteArgument("emote", this.emoteStorage)
-/*     */         });
+/* 299 */     giveEmoteBuilder.arguments(/* 300 */           GenericArguments.player(Text.of("player")), new EmoteArgument("emote", this.emoteStorage)
+            /*     */);
 /*     */     
 /* 303 */     giveEmoteBuilder.permission("emotes.give");
 /*     */     
-/* 305 */     cmdService.register(this, (CommandCallable)emotesCmdBuilder.build(), ListEmotesCommand.keys);
-/* 306 */     cmdService.register(this, (CommandCallable)randomEmoteBuilder.build(), GiveRandomEmoteCommand.keys);
-/* 307 */     cmdService.register(this, (CommandCallable)giveEmoteBuilder.build(), GiveEmoteCommand.keys);
+/* 305 */     cmdService.register(this, emotesCmdBuilder.build(), ListEmotesCommand.keys);
+/* 306 */     cmdService.register(this, randomEmoteBuilder.build(), GiveRandomEmoteCommand.keys);
+/* 307 */     cmdService.register(this, giveEmoteBuilder.build(), GiveEmoteCommand.keys);
 /*     */   }
 /*     */ 
 /*     */ 
