@@ -36,7 +36,7 @@
 /*    */ 
 /*    */   
 /*    */   public Collection<MessageReceiver> getMembers() {
-/* 39 */     return (Collection<MessageReceiver>)Sponge.getServer()
+/* 39 */     return Sponge.getServer()
 /* 40 */       .getOnlinePlayers()
 /* 41 */       .stream()
 /* 42 */       .filter(player -> player.hasPermission("emotes.channel.listen"))
@@ -63,7 +63,7 @@
 /* 63 */     for (EventListener<MessageChannelEvent.Chat> listener : this.listeners) {
 /*    */       
 /*    */       try {
-/* 66 */         listener.handle((Event)event);
+/* 66 */         listener.handle(event);
 /* 67 */       } catch (Exception e) {
 /*    */         
 /* 69 */         e.printStackTrace();

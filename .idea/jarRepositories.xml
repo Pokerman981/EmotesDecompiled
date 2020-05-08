@@ -46,5 +46,10 @@
       <option name="name" value="maven" />
       <option name="url" value="https://raw.github.com/FabioZumbi12/UltimateChat/mvn-repo/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="http://repo.spongepowered.org/maven" />
+    </remote-repository>
   </component>
 </project>

@@ -114,7 +114,7 @@
 /*     */ 
 /*     */ 
 /*     */       
-/* 117 */       Text hover = Text.join(new Text[] { Text.of(new Object[] { TextColors.YELLOW, ">> /", keys[0], Character.valueOf(' '), emote.getName(), " <<" }), (Text)Text.newLine()});
+/* 117 */       Text hover = Text.join(new Text[] { Text.of(new Object[] { TextColors.YELLOW, ">> /", keys[0], Character.valueOf(' '), emote.getName(), " <<" }), Text.NEW_LINE});
 /* 118 */       String[] lines = emote.getSelfLines();
 /* 119 */       Text[] texts = new Text[lines.length]; int i;
 /* 120 */       for (i = 0; i < lines.length; i++) {
@@ -127,12 +127,12 @@
 /*     */         
 /* 128 */         hover = Text.join(new Text[] { hover, texts[i] });
 /* 129 */         if (i + 1 > texts.length) {
-/* 130 */           hover = Text.join(new Text[] { hover, (Text)Text.newLine() });
+/* 130 */           hover = Text.join(new Text[] { hover, Text.NEW_LINE });
 /*     */         }
 /*     */       } 
 /*     */ 
 /*     */       
-/* 135 */       hover = Text.join(new Text[] { hover, (Text)Text.newLine(), (Text)Text.newLine(), Text.of(new Object[] { TextColors.YELLOW, ">> /", keys[0], Character.valueOf(' '), emote.getName(), Character.valueOf(' '), receiverName, " <<" }), (Text)Text.newLine() });
+/* 135 */       hover = Text.join(new Text[] { hover, Text.NEW_LINE, Text.NEW_LINE, Text.of(new Object[] { TextColors.YELLOW, ">> /", keys[0], Character.valueOf(' '), emote.getName(), Character.valueOf(' '), receiverName, " <<" }), Text.NEW_LINE });
 /* 136 */       lines = emote.getOtherLines();
 /* 137 */       texts = new Text[lines.length];
 /* 138 */       for (i = 0; i < lines.length; i++) {
@@ -145,7 +145,7 @@
 /*     */         
 /* 146 */         hover = Text.join(new Text[] { hover, texts[i] });
 /* 147 */         if (i + 1 > texts.length) {
-/* 148 */           hover = Text.join(new Text[] { hover, (Text)Text.newLine() });
+/* 148 */           hover = Text.join(new Text[] { hover, Text.NEW_LINE });
 /*     */         }
 /*     */       } 
 /*     */ 
@@ -176,7 +176,7 @@
 /* 176 */         .color(TextColors.BLUE)
 /* 177 */         .onHover((HoverAction)TextActions.showText(Text.of(new Object[] {
 /*     */                 
-/*     */                 TextColors.GOLD, "Created by: ", TextColors.YELLOW, "TPNils", Text.newLine(), TextColors.GOLD, "Version: ", TextColors.YELLOW, "1.1.1"
+/*     */                 TextColors.GOLD, "Created by: ", TextColors.YELLOW, "TPNils", Text.NEW_LINE, TextColors.GOLD, "Version: ", TextColors.YELLOW, "1.1.1"
 /* 180 */               }))).build());
 /* 181 */     builder.contents(contentList);
 /* 182 */     builder.linesPerPage(10);

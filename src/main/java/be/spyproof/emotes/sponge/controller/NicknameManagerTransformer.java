@@ -21,7 +21,7 @@
 /*    */   
 /*    */   public Text transform(String param) {
 /* 23 */     return this.nicknameController.getPlayer(param)
-/* 24 */       .map(data -> (Text)data.getNickname().map(TextSerializers.FORMATTING_CODE::deserialize).orElseGet(()))
+/* 24 */       .map(data -> (Text)data.getNickname().map(TextSerializers.FORMATTING_CODE::deserialize).orElseGet(null))
 /*    */ 
 /*    */       
 /* 27 */       .orElseGet(() -> Text.of(new Object[] { TextColors.WHITE, param }));

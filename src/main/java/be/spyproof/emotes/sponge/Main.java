@@ -1,57 +1,97 @@
 /*     */ package be.spyproof.emotes.sponge;
 /*     */ 
-/*     */ import be.spyproof.emotes.check.EmoteNameCheck;
-/*     */ import be.spyproof.emotes.check.EmoteStringKeyCheck;
-/*     */ import be.spyproof.emotes.da.CachedEmoteStorage;
-/*     */ import be.spyproof.emotes.da.IStorage;
-/*     */ import be.spyproof.emotes.da.MemoryStorage;
-/*     */ import be.spyproof.emotes.da.MySqlEmoteStorage;
-/*     */ import be.spyproof.emotes.event.EmoteEventBus;
-/*     */ import be.spyproof.emotes.event.EmoteUpdateEvent;
-/*     */ import be.spyproof.emotes.model.Emote;
-/*     */ import be.spyproof.emotes.service.PermissionService;
-/*     */ import be.spyproof.emotes.service.RegisterService;
-/*     */ import be.spyproof.emotes.sponge.channel.EmotesChannel;
-/*     */ import be.spyproof.emotes.sponge.commands.EmoteArgument;
-/*     */ import be.spyproof.emotes.sponge.commands.GiveEmoteCommand;
-/*     */ import be.spyproof.emotes.sponge.commands.GiveRandomEmoteCommand;
-/*     */ import be.spyproof.emotes.sponge.commands.ListEmotesCommand;
-/*     */ import be.spyproof.emotes.sponge.commands.RemainingArgsOrPlayerArgument;
-/*     */ import be.spyproof.emotes.sponge.controller.ConfigController;
-/*     */ import be.spyproof.emotes.sponge.controller.INameTransformer;
-/*     */ import be.spyproof.emotes.sponge.controller.NameTransformer;
-/*     */ import be.spyproof.emotes.sponge.controller.NicknameManagerTransformer;
-/*     */ import be.spyproof.emotes.sponge.listener.InvalidStorageNotifier;
-/*     */ import be.spyproof.emotes.sponge.listener.UChatListener;
-/*     */ import be.spyproof.emotes.sponge.util.ConversionUtils;
-/*     */ import be.spyproof.nickmanager.controller.ISpongeNicknameController;
-/*     */ import com.google.inject.Inject;
-/*     */ import java.io.File;
-/*     */ import java.io.IOException;
-/*     */ import java.util.Optional;
-/*     */ import java.util.UUID;
-/*     */ import org.slf4j.Logger;
-/*     */ import org.spongepowered.api.Sponge;
-/*     */ import org.spongepowered.api.command.CommandCallable;
-/*     */ import org.spongepowered.api.command.CommandManager;
-/*     */ import org.spongepowered.api.command.args.CommandElement;
-/*     */ import org.spongepowered.api.command.args.GenericArguments;
-/*     */ import org.spongepowered.api.command.spec.CommandExecutor;
-/*     */ import org.spongepowered.api.command.spec.CommandSpec;
-/*     */ import org.spongepowered.api.config.DefaultConfig;
-/*     */ import org.spongepowered.api.entity.living.player.Player;
-/*     */ import org.spongepowered.api.event.EventListener;
-/*     */ import org.spongepowered.api.event.Listener;
-/*     */ import org.spongepowered.api.event.game.state.GameInitializationEvent;
-/*     */ import org.spongepowered.api.event.game.state.GamePostInitializationEvent;
-/*     */ import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
-/*     */ import org.spongepowered.api.event.game.state.GameStartingServerEvent;
-/*     */ import org.spongepowered.api.event.game.state.GameStoppingEvent;
-/*     */ import org.spongepowered.api.event.network.ClientConnectionEvent;
-/*     */ import org.spongepowered.api.plugin.Plugin;
-/*     */ import org.spongepowered.api.text.Text;
-/*     */ import org.spongepowered.api.text.channel.MessageChannel;
-/*     */ import org.spongepowered.api.text.format.TextColors;
+/*     */
+
+import be.spyproof.emotes.check.EmoteNameCheck;
+import be.spyproof.emotes.check.EmoteStringKeyCheck;
+import be.spyproof.emotes.da.CachedEmoteStorage;
+import be.spyproof.emotes.da.IStorage;
+import be.spyproof.emotes.da.MemoryStorage;
+import be.spyproof.emotes.da.MySqlEmoteStorage;
+import be.spyproof.emotes.event.EmoteEventBus;
+import be.spyproof.emotes.event.EmoteUpdateEvent;
+import be.spyproof.emotes.model.Emote;
+import be.spyproof.emotes.service.PermissionService;
+import be.spyproof.emotes.service.RegisterService;
+import be.spyproof.emotes.sponge.channel.EmotesChannel;
+import be.spyproof.emotes.sponge.commands.*;
+import be.spyproof.emotes.sponge.controller.ConfigController;
+import be.spyproof.emotes.sponge.controller.INameTransformer;
+import be.spyproof.emotes.sponge.controller.NameTransformer;
+import be.spyproof.emotes.sponge.controller.NicknameManagerTransformer;
+import be.spyproof.emotes.sponge.listener.InvalidStorageNotifier;
+import be.spyproof.emotes.sponge.listener.UChatListener;
+import be.spyproof.emotes.sponge.util.ConversionUtils;
+import be.spyproof.nickmanager.controller.ISpongeNicknameController;
+import com.google.inject.Inject;
+import org.slf4j.Logger;
+import org.spongepowered.api.Sponge;
+import org.spongepowered.api.command.CommandManager;
+import org.spongepowered.api.command.args.GenericArguments;
+import org.spongepowered.api.command.spec.CommandSpec;
+import org.spongepowered.api.config.DefaultConfig;
+import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.game.state.*;
+import org.spongepowered.api.event.network.ClientConnectionEvent;
+import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.format.TextColors;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
+
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
+/*     */
 /*     */ 
 /*     */ 
 /*     */ 
