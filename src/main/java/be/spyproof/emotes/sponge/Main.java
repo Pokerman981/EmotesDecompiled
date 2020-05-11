@@ -5,7 +5,6 @@
 import be.spyproof.emotes.check.EmoteNameCheck;
 import be.spyproof.emotes.check.EmoteStringKeyCheck;
 import be.spyproof.emotes.da.CachedEmoteStorage;
-import be.spyproof.emotes.da.IStorage;
 import be.spyproof.emotes.da.MemoryStorage;
 import be.spyproof.emotes.da.MySqlEmoteStorage;
 import be.spyproof.emotes.event.EmoteEventBus;
@@ -108,14 +107,17 @@ import java.util.Optional;
 /*     */   @Inject
 /*     */   @DefaultConfig(sharedRoot = true)
 /*     */   private File configDir;
-/*     */   private IStorage<Emote, String> emoteStorage;
+/*     */   private MemoryStorage<Emote, String> emoteStorage;
 /*     */   private EmotesChannel emoteMessageChannel;
 /*     */   private ConfigController config;
+            public static Main instance;
 /*     */   
 /*     */   @Listener
 /*     */   public void onPreInit(GamePreInitializationEvent event) throws IOException {
 /*  77 */     this.logger.trace("PreInit");
-/*     */     
+/*     */
+              instance = this;
+
 /*  79 */     this.config = new ConfigController(this.configDir);
 /*  80 */     this.config.load();
 /*     */     
@@ -128,13 +130,13 @@ import java.util.Optional;
 /*     */ 
 /*     */ 
 /*     */         
-/*  91 */         .emoteStorage = (IStorage<Emote, String>)new CachedEmoteStorage(EmoteNameCheck.get(), EmoteStringKeyCheck.get(), new MySqlEmoteStorage(this.config.getMySQLHost(), this.config.getMySQLPort(), this.config.getMySQLDb(), this.config.getMySQLUser(), this.config.getMySQLPass()));
+/*  91 */         .emoteStorage = new CachedEmoteStorage<>(EmoteNameCheck.get(), EmoteStringKeyCheck.get(), new MySqlEmoteStorage(this.config.getMySQLHost(), this.config.getMySQLPort(), this.config.getMySQLDb(), this.config.getMySQLUser(), this.config.getMySQLPass()));
 /*     */     }
 /*     */     else {
 /*     */       
 /*  95 */       this
 /*     */         
-/*  97 */         .emoteStorage = (IStorage<Emote, String>)new MemoryStorage(EmoteNameCheck.get(), EmoteStringKeyCheck.get());
+/*  97 */         .emoteStorage = new MemoryStorage<>(EmoteNameCheck.get(), EmoteStringKeyCheck.get());
 /*     */     } 
 /*     */ 
 /*     */     

@@ -2,12 +2,16 @@
 /*    */ 
 /*    */ import be.spyproof.emotes.sponge.event.MessageChannelChatEvent;
 /*    */ import com.google.common.base.Preconditions;
-/*    */ import java.util.ArrayList;
-/*    */ import java.util.Collection;
+/*    */ import java.io.Console;
+import java.util.ArrayList;
+/*    */ import java.util.Arrays;
+import java.util.Collection;
 /*    */ import java.util.List;
 /*    */ import java.util.stream.Collectors;
 /*    */ import javax.annotation.Nullable;
-/*    */ import org.spongepowered.api.Sponge;
+/*    */ import com.magitechserver.magibridge.discord.DiscordMessageBuilder;
+import org.apache.commons.lang3.ArrayUtils;
+import org.spongepowered.api.Sponge;
 /*    */ import org.spongepowered.api.entity.living.player.Player;
 /*    */ import org.spongepowered.api.event.Event;
 /*    */ import org.spongepowered.api.event.EventListener;
@@ -72,10 +76,26 @@
 /* 72 */     if (event.isCancelled() || event.isMessageCancelled()) {
 /*    */       return;
 /*    */     }
-/*    */     
+
+
+            StringBuilder message = new StringBuilder("** *" +
+                    original.toPlain().replaceFirst("\\*", "")
+                            .replaceFirst("\\*", "* **"));
+
+            try {
+                DiscordMessageBuilder.forDefaultChannel()
+                        .useWebhook(false)
+                        .message(message.toString())
+                        .send();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
 /* 76 */     for (MessageReceiver member : getMembers()) {
 /*    */       
 /* 78 */       if (member instanceof ChatTypeMessageReceiver) {
+
 /* 79 */         transformMessage(sender, member, original, type).ifPresent(text -> ((ChatTypeMessageReceiver)member).sendMessage(type, text)); continue;
 /*    */       } 
 /* 81 */       transformMessage(sender, member, original, type).ifPresent(member::sendMessage);
