@@ -77,10 +77,10 @@ import org.spongepowered.api.Sponge;
 /*    */       return;
 /*    */     }
 
-
-            StringBuilder message = new StringBuilder("** *" +
+            StringBuilder message = new StringBuilder("`*" +
                     original.toPlain().replaceFirst("\\*", "")
-                            .replaceFirst("\\*", "* **"));
+                            .replaceFirst("\\*", "*")
+                            .replaceAll("`", "")).append("`");
 
             try {
                 DiscordMessageBuilder.forDefaultChannel()
