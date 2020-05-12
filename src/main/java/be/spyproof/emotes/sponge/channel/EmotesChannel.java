@@ -77,10 +77,10 @@ import org.spongepowered.api.Sponge;
 /*    */       return;
 /*    */     }
 
-            StringBuilder message = new StringBuilder("`*" +
+            StringBuilder message = new StringBuilder("✧" +
                     original.toPlain().replaceFirst("\\*", "")
-                            .replaceFirst("\\*", "*")
-                            .replaceAll("`", "")).append("`");
+                            .replaceFirst("\\*", "✧")
+                            .replaceAll("`", "")); // This replace is to stop people from inserting code blocks
 
             try {
                 DiscordMessageBuilder.forDefaultChannel()
