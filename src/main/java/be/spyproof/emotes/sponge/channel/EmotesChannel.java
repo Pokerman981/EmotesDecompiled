@@ -1,28 +1,45 @@
 /*    */ package be.spyproof.emotes.sponge.channel;
 /*    */ 
-/*    */ import be.spyproof.emotes.sponge.event.MessageChannelChatEvent;
-/*    */ import com.google.common.base.Preconditions;
-/*    */ import java.io.Console;
-import java.util.ArrayList;
-/*    */ import java.util.Arrays;
-import java.util.Collection;
-/*    */ import java.util.List;
-/*    */ import java.util.stream.Collectors;
-/*    */ import javax.annotation.Nullable;
-/*    */ import com.magitechserver.magibridge.discord.DiscordMessageBuilder;
-import org.apache.commons.lang3.ArrayUtils;
+/*    */
+
+import be.spyproof.emotes.sponge.event.MessageChannelChatEvent;
+import com.google.common.base.Preconditions;
+import com.magitechserver.magibridge.discord.DiscordMessageBuilder;
 import org.spongepowered.api.Sponge;
-/*    */ import org.spongepowered.api.entity.living.player.Player;
-/*    */ import org.spongepowered.api.event.Event;
-/*    */ import org.spongepowered.api.event.EventListener;
-/*    */ import org.spongepowered.api.event.cause.Cause;
-/*    */ import org.spongepowered.api.event.cause.EventContext;
-/*    */ import org.spongepowered.api.event.message.MessageChannelEvent;
-/*    */ import org.spongepowered.api.text.Text;
-/*    */ import org.spongepowered.api.text.channel.ChatTypeMessageReceiver;
-/*    */ import org.spongepowered.api.text.channel.MessageChannel;
-/*    */ import org.spongepowered.api.text.channel.MessageReceiver;
-/*    */ import org.spongepowered.api.text.chat.ChatType;
+import org.spongepowered.api.event.EventListener;
+import org.spongepowered.api.event.cause.Cause;
+import org.spongepowered.api.event.cause.EventContext;
+import org.spongepowered.api.event.message.MessageChannelEvent;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.channel.ChatTypeMessageReceiver;
+import org.spongepowered.api.text.channel.MessageChannel;
+import org.spongepowered.api.text.channel.MessageReceiver;
+import org.spongepowered.api.text.chat.ChatType;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
+/*    */
 /*    */ 
 /*    */ 
 /*    */ 
@@ -82,7 +99,7 @@ import org.spongepowered.api.Sponge;
                             .replaceFirst("\\*", "✧")
                             .replaceAll("`", "")); // This replace is to stop people from inserting code blocks
 
-            try {
+            try { // Send the message to the default discord channel from the magi discord bot
                 DiscordMessageBuilder.forDefaultChannel()
                         .useWebhook(false)
                         .message(message.toString())

@@ -280,7 +280,7 @@ import java.util.Optional;
 /*     */   @Listener
 /*     */   public void onPostInit(GamePostInitializationEvent event) {
 /* 240 */     this.logger.trace("PostInit"); //Not sure if this works at all but what was decompiled surely didn't work either
-/* 241 */     RegisterService.register(new PermissionService((perm, uuid) -> Sponge.getServer().getPlayer(uuid).map((player) -> null), false));
+/* 241 */     RegisterService.register(new PermissionService((perm, uuid) -> Sponge.getServer().getPlayer(uuid).map((player) -> true), false));
 /*     */ 
 /*     */           
 /* 244 */
