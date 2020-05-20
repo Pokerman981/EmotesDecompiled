@@ -9,13 +9,10 @@
  import be.spyproof.emotes.event.EmoteEventBus;
  import be.spyproof.emotes.event.EmoteUpdateEvent;
  import be.spyproof.emotes.model.Emote;
- import be.spyproof.emotes.service.PermissionService;
- import be.spyproof.emotes.service.RegisterService;
  import be.spyproof.emotes.sponge.channel.EmotesChannel;
  import be.spyproof.emotes.sponge.commands.*;
  import be.spyproof.emotes.sponge.controller.ConfigController;
  import be.spyproof.emotes.sponge.controller.INameTransformer;
- import be.spyproof.emotes.sponge.controller.NameTransformer;
  import be.spyproof.emotes.sponge.controller.NicknameManagerTransformer;
  import be.spyproof.emotes.sponge.listener.InvalidStorageNotifier;
  import be.spyproof.emotes.sponge.listener.UChatListener;
@@ -31,6 +28,7 @@
  import org.spongepowered.api.event.Listener;
  import org.spongepowered.api.event.game.state.*;
  import org.spongepowered.api.event.network.ClientConnectionEvent;
+ import org.spongepowered.api.plugin.Dependency;
  import org.spongepowered.api.plugin.Plugin;
  import org.spongepowered.api.text.Text;
  import org.spongepowered.api.text.format.TextColors;
@@ -38,6 +36,7 @@
  import java.io.File;
  import java.io.IOException;
 
+// import be.spyproof.emotes.sponge.controller.NameTransformer;
 
 
 
@@ -89,15 +88,18 @@
 
 
 
- 
- 
- 
- 
- 
- 
- 
- 
- @Plugin(id = "emotes-sponge", name = "Emotes", version = "1.1.1", description = "Emotes implementation for sponge", authors = {"TPNils"})
+
+
+
+
+
+
+
+
+
+ @Plugin(id = "emotes-sponge", name = "Emotes", version = "1.1.1", description = "Emotes implementation for sponge", authors = {"TPNils", "Pokerman981 (Troy G)"}, dependencies = {
+         @Dependency(id = "nickname_manager", optional = false)
+ })
  public class Main
  {
    @Inject
@@ -120,21 +122,9 @@
      this.config.load();
      
      if (MySqlEmoteStorage.canConnect(this.config.getMySQLHost(), this.config.getMySQLPort(), this.config.getMySQLDb(), this.config.getMySQLUser(), this.config.getMySQLPass())) {
-       this
- 
- 
- 
- 
- 
- 
-         
-         .emoteStorage = new CachedEmoteStorage<>(EmoteNameCheck.get(), EmoteStringKeyCheck.get(), new MySqlEmoteStorage(this.config.getMySQLHost(), this.config.getMySQLPort(), this.config.getMySQLDb(), this.config.getMySQLUser(), this.config.getMySQLPass()));
-     }
-     else {
-       
-       this
-         
-         .emoteStorage = new MemoryStorage<>(EmoteNameCheck.get(), EmoteStringKeyCheck.get());
+       this.emoteStorage = new CachedEmoteStorage<>(EmoteNameCheck.get(), EmoteStringKeyCheck.get(), new MySqlEmoteStorage(this.config.getMySQLHost(), this.config.getMySQLPort(), this.config.getMySQLDb(), this.config.getMySQLUser(), this.config.getMySQLPass()));
+     } else {
+       this.emoteStorage = new MemoryStorage<>(EmoteNameCheck.get(), EmoteStringKeyCheck.get());
      } 
  
      
@@ -145,11 +135,9 @@
              this.emoteStorage.remove(e.getEmote());
            } 
          });
- 
-     
+
      this.emoteMessageChannel = new EmotesChannel();
- 
-     
+
      if (this.emoteStorage.getAll().size() == 0) {
        
        this.emoteStorage.save(ConversionUtils.createEmote("cutie", 
@@ -278,10 +266,7 @@
    @Listener
    public void onPostInit(GamePostInitializationEvent event) {
      this.logger.trace("PostInit"); //Not sure if this works at all but what was decompiled surely didn't work either
-     RegisterService.register(new PermissionService((perm, uuid) -> Sponge.getServer().getPlayer(uuid).map((player) -> true), false));
- 
-           
-
+       // RegisterService.register(new PermissionService((perm, uuid) -> Sponge.getServer().getPlayer(uuid).map), Boolean.FALSE));
    }
  
  
@@ -293,13 +278,15 @@
    @Listener
    public void onServerStart(GameStartingServerEvent event) throws ClassNotFoundException {
      Class.forName("be.spyproof.nickmanager.controller.ISpongeNicknameController");
-     NicknameManagerTransformer nicknameManagerTransformer =  new NicknameManagerTransformer(Sponge.getServiceManager().provide(ISpongeNicknameController.class).get());
-     NameTransformer nameTransformer = new NameTransformer();
+     ISpongeNicknameController nicknameController = Sponge.getServiceManager().provide(ISpongeNicknameController.class).get();
+
+     NicknameManagerTransformer nicknameManagerTransformer =  new NicknameManagerTransformer(nicknameController);
+     // NameTransformer nameTransformer = new NameTransformer();
      this.logger.trace("Start");
  
      
      CommandManager cmdService = Sponge.getCommandManager();
-     INameTransformer transformer;
+     INameTransformer transformer = nicknameManagerTransformer;
  
      
 //     try {
@@ -311,11 +298,12 @@
 //     } catch (ClassNotFoundException classNotFoundException) {}
  
      
-     if (nicknameManagerTransformer == null) {
-       nameTransformer = new NameTransformer();
-     }
+//     if (nicknameManagerTransformer == null) {
+//       nameTransformer = new NameTransformer();
+//     }
+
      CommandSpec.Builder emotesCmdBuilder = CommandSpec.builder();
-     emotesCmdBuilder.executor(new ListEmotesCommand(this.emoteStorage, nameTransformer, this.emoteMessageChannel, this.config.noPermissionMsg()));
+     emotesCmdBuilder.executor(new ListEmotesCommand(this.emoteStorage, nicknameManagerTransformer, this.emoteMessageChannel, this.config.noPermissionMsg()));
      emotesCmdBuilder.arguments(           GenericArguments.optional(new EmoteArgument("emote", this.emoteStorage)),
                        GenericArguments.optional(new RemainingArgsOrPlayerArgument(Text.of("receiver")))
             );

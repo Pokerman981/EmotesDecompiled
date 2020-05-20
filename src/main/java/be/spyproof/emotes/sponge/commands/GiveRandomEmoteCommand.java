@@ -4,13 +4,6 @@ package be.spyproof.emotes.sponge.commands;
 
 import be.spyproof.emotes.da.IStorage;
 import be.spyproof.emotes.model.Emote;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-
 import be.spyproof.emotes.sponge.Main;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandException;
@@ -23,6 +16,11 @@ import org.spongepowered.api.scheduler.Task;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.channel.MessageChannel;
 import org.spongepowered.api.text.serializer.TextSerializers;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 
 
 public class GiveRandomEmoteCommand implements CommandExecutor {
@@ -99,7 +97,6 @@ public class GiveRandomEmoteCommand implements CommandExecutor {
 
 
         return CommandResult.empty();
-
     }
 
 }
