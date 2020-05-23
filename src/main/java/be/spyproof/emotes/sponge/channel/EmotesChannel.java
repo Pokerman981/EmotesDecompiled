@@ -79,7 +79,10 @@ import java.util.stream.Collectors;
             StringBuilder message = new StringBuilder("✧" +
                     original.toPlain().replaceFirst("\\*", "")
                             .replaceFirst("\\*", "✧")
-                            .replaceAll("`", "")); // This replace is to stop people from inserting code blocks
+                            .replaceAll("`", "") // This replace is to stop people from inserting code blocks
+                            .replaceAll("[;:|]{2,}", "") // This is to remove the magic from names when sent to discord
+                            .replaceAll("[i]{2,}", "")
+                            .replaceAll("[l]{2,}", ""));
 
             try { // Send the message to the default discord channel from the magi discord bot
                 DiscordMessageBuilder.forDefaultChannel()
