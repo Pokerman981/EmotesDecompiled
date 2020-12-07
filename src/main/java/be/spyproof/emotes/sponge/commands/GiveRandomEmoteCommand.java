@@ -50,8 +50,9 @@ public class GiveRandomEmoteCommand implements CommandExecutor {
         Player player = optional.get();
         List<Emote> emotes = new ArrayList<>(this.storage.getAll());
 
-
         if (emotes.size() == 0) {
+            System.out.println("no emotes loaded, WTF???");
+
             Sponge.getCommandManager().process(
                     Sponge.getServer().getConsole(), this.backupCommand
                             .replace("${user}", player.getName()).replaceFirst("^/", ""));
@@ -62,6 +63,7 @@ public class GiveRandomEmoteCommand implements CommandExecutor {
                         .deserialize(this.backupMessage
                                 .replace("${user}", player.getName())));
             }
+
             return CommandResult.empty();
         }
 
@@ -73,8 +75,20 @@ public class GiveRandomEmoteCommand implements CommandExecutor {
             emotesNew.removeIf(e -> player.hasPermission("emotes.command.${emote}".replace("${emote}", e.getName())));
             MessageChannel.TO_CONSOLE.send(Text.of(emotesNew.size()));
 
+            if (emotesNew.size() == 0) {
+                Sponge.getCommandManager().process(
+                        Sponge.getServer().getConsole(), this.backupCommand
+                                .replace("${user}", player.getName()).replaceFirst("^/", ""));
 
 
+                if (!this.backupMessage.isEmpty()) {
+                    player.sendMessage(TextSerializers.FORMATTING_CODE
+                            .deserialize(this.backupMessage
+                                    .replace("${user}", player.getName())));
+                }
+
+                return;
+            }
 
             Emote emote = emotesNew.get(this.random.nextInt(emotesNew.size()));
 

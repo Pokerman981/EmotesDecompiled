@@ -236,13 +236,7 @@
                Text.of(TextColors.DARK_GREEN, "*", TextColors.RESET, " ${sender}", TextColors.DARK_GREEN, " licks ", TextColors.RESET, "${receiver}", TextColors.DARK_GREEN, "'s face * ")));
      } 
    }
- 
- 
- 
- 
- 
- 
-   
+
    @Listener
    public void onInit(GameInitializationEvent event) {
      this.logger.trace("Init");
@@ -255,26 +249,13 @@
        this.emoteMessageChannel.addListener(new UChatListener());
      } catch (ClassNotFoundException classNotFoundException) {}
    }
- 
- 
- 
- 
- 
- 
- 
-   
+
    @Listener
    public void onPostInit(GamePostInitializationEvent event) {
      this.logger.trace("PostInit"); //Not sure if this works at all but what was decompiled surely didn't work either
        // RegisterService.register(new PermissionService((perm, uuid) -> Sponge.getServer().getPlayer(uuid).map), Boolean.FALSE));
    }
- 
- 
- 
- 
- 
- 
-   
+
    @Listener
    public void onServerStart(GameStartingServerEvent event) throws ClassNotFoundException {
      Class.forName("be.spyproof.nickmanager.controller.ISpongeNicknameController");
