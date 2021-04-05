@@ -16,15 +16,14 @@
    public NicknameManagerTransformer(ISpongeNicknameController nicknameController) {
      this.nicknameController = nicknameController;
    }
- 
+
  
    
    public Text transform(String param) {
 
-     return Text.of(this.nicknameController.getPlayer(param)
+     return this.nicknameController.getPlayer(param)
              .map(data -> (data.getNickname().map(TextSerializers.FORMATTING_CODE::deserialize).orElse(null)))
-             .orElse(Text.of(TextColors.WHITE, param))
-             , TextColors.RESET, TextStyles.RESET);
+             .orElse(Text.of(TextStyles.RESET, TextStyles.RESET, TextColors.WHITE).concat(Text.of(param)).concat(Text.of(TextColors.RESET, TextStyles.RESET)));
    }
  }
 
